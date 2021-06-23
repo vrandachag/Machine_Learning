@@ -13,8 +13,6 @@ print(df)
 d = {'US Citizen':1,'Eligible NonCitizen':-1,'Non-Citizen':0}
 df['CitizenDesc'] = df['CitizenDesc'].map(d)
 
-print("DESC:")
-print(df)
 d = {'Y': 1,'N':0}
 df['Project'] = df['Project'].map(d)
 
@@ -28,16 +26,14 @@ y = df['Project']
 print(X)
 print(y)
 
-dtree = tree.DecisionTreeClassifier()
-dtree = dtree.fit(X,y)
-#tree.plot_tree(dtree)
-
 dtree = DecisionTreeClassifier()
 dtree = dtree.fit(X, y)
-data = sklearn.tree.export_graphviz(dtree, out_file=None, feature_names=features)
-graph = pydotplus.graph_from_dot_data(data)
-graph.write_png('mydecisiontree.png')
 
-img=pltimg.imread('mydecisiontree.png')
-imgplot = plt.imshow(img)
+
+#worked
+tree.plot_tree(dtree,filled = True,rounded=True,precision=2,fontsize=12)
+plt.savefig("decisiontree.png")
+
+print(dtree.predict([[25000,-1,1]]))
+
 plt.show()
